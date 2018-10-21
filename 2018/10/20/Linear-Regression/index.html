@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="machine learning,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linear Regression Linear Regression is the first algorithm when I start to learn machine learning. Before machine learning, I have got in touch with it in statistics. In my memory, linear regression i">
+<meta name="keywords" content="machine learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Regression">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/Linear-Regression/index.html">
+<meta property="og:site_name" content="Super FF&#39; Blogs">
+<meta property="og:description" content="Linear Regression Linear Regression is the first algorithm when I start to learn machine learning. Before machine learning, I have got in touch with it in statistics. In my memory, linear regression i">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-21T02:13:06.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linear Regression">
+<meta name="twitter:description" content="Linear Regression Linear Regression is the first algorithm when I start to learn machine learning. Before machine learning, I have got in touch with it in statistics. In my memory, linear regression i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/20/Linear-Regression/">
+
+
+
+
+
+  <title>Linear Regression | Super FF' Blogs</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Super FF' Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">STAY HUNGRY. STAY FOOLISH</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/Linear-Regression/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Super FF' Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linear Regression</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T16:06:20+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/study/" itemprop="url" rel="index">
+                    <span itemprop="name">study</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="linear-regression">Linear Regression</h1>
+<p>Linear Regression is the first algorithm when I start to learn machine learning. Before machine learning, I have got in touch with it in statistics. In my memory, linear regression is very simple. And the most important thing is Least Mean Square(hereinafter LMS). But why using LMS to calculate linear regression model? Now we will explore this.</p>
+<h2 id="construct-the-problem">Construct the problem</h2>
+<p>Given the sample<span class="math inline">\(X\in R_{m \times n}\)</span> (we always use column vector to represent sample data), <span class="math inline">\(Y\in R_{1 \times n}\)</span>. Suppose <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>has the linear relationship, we need to get the model’s parameters <span class="math inline">\(W \in R_{m \times 1}\)</span>. Except that, we would give a <span class="math inline">\(bias\)</span>. So the model would be: <span class="math display">\[
+Y = W^{T} * X + bias
+\]</span> For simplicity, we could extend <span class="math inline">\(X\)</span> to <span class="math inline">\(R_{m+1 \times n}\)</span>. The last row are all 1. Then extend <span class="math inline">\(W\)</span> to <span class="math inline">\(R_{m+1 \times n}\)</span>, the <span class="math inline">\(bias\)</span> could be merged to <span class="math inline">\(W\)</span>. Now the model becomes: <span class="math display">\[
+Y = W^{T} * X
+\]</span> An the problem is to calculate the unknown item <span class="math inline">\(W\)</span></p>
+<h2 id="theory-analysis">Theory Analysis</h2>
+<p>Above we have constructed the problem, due to the sample data always more than parameters. So we cannot get a unique result. But we could use optimization to approximate the result: <span class="math display">\[
+Y^{‘} = W^{T} * X
+\]</span> , where <span class="math display">\[
+Y^{‘} \approx Y
+\]</span> Now the LSM occurred, define<span class="math inline">\(L = \frac{1}{2} * (Y^{‘} - Y)^2\)</span> , and minimize <span class="math inline">\(L\)</span> could make <span class="math inline">\(Y^{&#39;}\)</span> approximates to <span class="math inline">\(Y\)</span> . The optimization problem is: <span class="math inline">\(min(L)\)</span>.</p>
+<h3 id="statistical-explanation">Statistical Explanation</h3>
+<p>From statistical point of view, suppose<span class="math inline">\(y = y^{‘} + \epsilon\)</span>, where <span class="math inline">\(\epsilon\)</span> is the error. In statistic, we define error is Gaussian distribution, by normalization we could get:<span class="math inline">\(\epsilon \sim N(0,\delta)\)</span> . So, <span class="math display">\[
+p(\epsilon|W,x) = \frac{1}{\sqrt{2\pi}\delta} \exp(-\frac{\epsilon^2}{2\delta^2}) = \frac{1}{\sqrt{2\pi}\delta} \exp(-\frac{(y-W^Tx)^2}{2\delta^2})
+\]</span> For point <span class="math inline">\(i\)</span>, <span class="math inline">\(p(ϵ(i)|W,x(i))=p(y(i)|W,x(i))\)</span>, so the likelihood function: <span class="math display">\[
+L(W) = \prod_{i=1}^{n} p(y^{(i)} | W, x^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+\log{L(W)} = \sum_{i=1}^m p(y^{(i)} | x^{(i)},W) = -m\log{\sqrt{2\pi}\delta} - \sum_{i=1}^m \frac{(y^{(i)} - W^Tx^{(i)})^2}{2\delta^2}
+\]</span></p>
+<p>According to max likelihood approximation: <span class="math display">\[
+obj = max(\log L(W))
+\]</span> so as to, <span class="math display">\[
+obj = \min{(\sum_{i=1}^m (y^{(i)} - W^Tx^{(i)})^2)}
+\]</span> This is the same as Least Mean Square.</p>
+<h2 id="solve-the-optimization-problem">Solve the Optimization Problem</h2>
+<p>In optimization, the gradient decent is the most common used algorithm. It just like people to find a fastest way to get down a hillside. This person would stop to try every directions around him. If one way led to the fastest down way at current location, he would choose it. He would repeat above methods until arrived the destination.</p>
+<p>OK. In math, gradient is the fastest rising direction. So we could use negative gradient as the fasted decrease direction. At each step, we compute the gradient of the objective function. Then update the unknown parameters as: <span class="math display">\[
+W = W - \eta * gradient(obj)
+\]</span> In detail, for the j-th parameter <span class="math inline">\(W_j\)</span> of <span class="math inline">\(W\)</span> , the update rule is: <span class="math display">\[
+W_j = W_j - \eta * \frac{\partial(obj)}{\partial(x_j^{(i)})}
+\]</span></p>
+<p><span class="math display">\[
+W_j = W_j - \eta * (W^TX^{(i)} - y^{(i)})x^{(i)}_j
+\]</span></p>
+<p>For all sample data, the update rule is to sum all the gradient: <span class="math display">\[
+W_j = W_j - \sum_{i=1}^{n}\eta * (W^TX^{(i)} - y^{(i)})x^{(i)}_j
+\]</span></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/20/General-Linear-Model/" rel="next" title="General Linear Model">
+                <i class="fa fa-chevron-left"></i> General Linear Model
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/20/Logistic-Regression/" rel="prev" title="Logistic Regression">
+                Logistic Regression <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Frankie</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linear-regression"><span class="nav-number">1.</span> <span class="nav-text">Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#construct-the-problem"><span class="nav-number">1.1.</span> <span class="nav-text">Construct the problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theory-analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Theory Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#statistical-explanation"><span class="nav-number">1.2.1.</span> <span class="nav-text">Statistical Explanation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solve-the-optimization-problem"><span class="nav-number">1.3.</span> <span class="nav-text">Solve the Optimization Problem</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frankie</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Tree Model in Machine Learning Hope somebody have heard about Decision Tree, CART, Random Forest, GBDT, et.al. Actually, all of those algorithms are based on Tree. How could tree would help computes t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Super FF&#39; Blogs">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/Tree-Model-in-ML/index.html">
+<meta property="og:site_name" content="Super FF&#39; Blogs">
+<meta property="og:description" content="Tree Model in Machine Learning Hope somebody have heard about Decision Tree, CART, Random Forest, GBDT, et.al. Actually, all of those algorithms are based on Tree. How could tree would help computes t">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/dmlc/web-data/master/xgboost/model/cart.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*OuB7IlENrdpXozK1R0UEzw.gif">
+<meta property="og:image" content="http://scott.fortmann-roe.com/docs/docs/BiasVariance/biasvariance.png">
+<meta property="og:image" content="https://c.mql5.com/2/33/image1__1.png">
+<meta property="og:updated_time" content="2018-10-21T02:17:35.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Super FF&#39; Blogs">
+<meta name="twitter:description" content="Tree Model in Machine Learning Hope somebody have heard about Decision Tree, CART, Random Forest, GBDT, et.al. Actually, all of those algorithms are based on Tree. How could tree would help computes t">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dmlc/web-data/master/xgboost/model/cart.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/20/Tree-Model-in-ML/">
+
+
+
+
+
+  <title> | Super FF' Blogs</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Super FF' Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">STAY HUNGRY. STAY FOOLISH</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/Tree-Model-in-ML/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Super FF' Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T16:44:29+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="tree-model-in-machine-learning">Tree Model in Machine Learning</h1>
+<p>Hope somebody have heard about Decision Tree, CART, Random Forest, GBDT, et.al. Actually, all of those algorithms are based on Tree. How could tree would help computes to do classification or regression tasks? Let’s explore it:</p>
+<h2 id="define-task">Define Task</h2>
+<p>Before exploring all of those tree models, let’s define the task which we would handle by using above algorithms.</p>
+<h4 id="classification-task">Classification Task</h4>
+<p>Suppose, we want to predict whether a person like playing computer games according to gender, age, occupation, et.al.</p>
+<p>Then the problem set is: Given <span class="math inline">\(X\in F_{m\times n}, Y \in {like, dislike}\)</span> to predict person whether like computer games.</p>
+<h4 id="regression-task">Regression Task</h4>
+<p>Nowadays in China, the house pricing is the most concerned topic. Suppose we have a lot of house parameters such as size, the distance btw mall, et.al. Then we need to predict houses’ price according to historic data.</p>
+<p>Then the problem set: Given <span class="math inline">\(X\in F_{m\times n}, Y\in R_{1\times n}\)</span> to build a model to predict house’s price according to <span class="math inline">\(X,Y\)</span></p>
+<h2 id="decision-tree">Decision Tree</h2>
+<p>Let’s look at the following picture(copy from <a href="http://xgboost.readthedocs.io/en/latest/model.html" target="_blank" rel="noopener">xgboost</a>):</p>
+<figure>
+<img src="https://raw.githubusercontent.com/dmlc/web-data/master/xgboost/model/cart.png" alt="img"><figcaption>img</figcaption>
+</figure>
+<p>Then you would know the process of decision tree. We need to choose a feature to split the whole data sets until the tree node cannot to split. And the critical problem is how to choose the splitting feature at each step.</p>
+<h4 id="impurity">Impurity</h4>
+<p>Suppose the whole dataset is <strong>impure</strong> due to there are too many classes(like, dislike). At each step, we need to choose a feature which could increase the purity after splitting the dataset according to the selected feature. Because the split node would contain small classes.</p>
+<ul>
+<li><p>Information Entropy</p>
+<p>Entropy is used to define the confusion degree of a system. In information theory, Shannon used it to define the information. The entropy is bigger, the information is more. We could use it to define the impurity. <strong>The entropy is bigger, the impurity is bigger.</strong> <span class="math display">\[
+Entropy(X) = \sum_{i=0}^c -p_i \log p_i
+\]</span> <span class="math inline">\(p_i = \frac{num\ of \ class\ i}{total\ num}\)</span></p></li>
+<li><p>Gini Coefficient</p>
+<p>Gini coefficient is used to define the income equality. It is bigger then the income is more inequality. So could also use it to define the impurity. <strong>The gini index is bigger, the impurity is bigger.</strong> <span class="math display">\[
+Gini(X) = 1- \sum_{i=1}^{c}p_i^2
+\]</span> , <span class="math inline">\(p_i\)</span> is the same as above.</p></li>
+</ul>
+<h4 id="informationpurity-gain">Information/Purity Gain</h4>
+<p>Above we have talked about how to define the impurity. So we split the dataset based on the feature which could most increase the dataset’s purity. No matter entropy or gini index, after splitting they would decrease. So the information gain is: <span class="math display">\[
+Gain(X, f) = Impurity\_before - Impurity\_after
+\]</span></p>
+<p><span class="math display">\[
+Impurity\_after = \sum_{v=1}^V \frac{|D_v|}{|D|} impurity\_of\_v
+\]</span></p>
+<p>So at each step , we choose the biggest Gain feature to split the tree node until reach some condition(depth, leaf node constriction, et.al.). After the tree built, we could use the model to do classification, just like a marble flow from the root node to leafs. Each leaf represents one class/label.</p>
+<figure>
+<img src="https://cdn-images-1.medium.com/max/1200/1*OuB7IlENrdpXozK1R0UEzw.gif" alt="img"><figcaption>img</figcaption>
+</figure>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Let’s think about one index feature, such as there 100 sample, then their index feature is 1,2,…,1001,2,…,100 . The index feature would lead to best split. But it is of course not a good choice. Actually <strong>Information Gain</strong> prefers the more value features.</li>
+<li>How could we deal with numerical features? <strong>Bucketing</strong></li>
+</ul>
+<h4 id="conclusion">Conclusion</h4>
+<p>Now let conclude the decision tree algorithm:</p>
+<ul>
+<li>Compute current impurity (Entropy or Gini Index), <strong>impurity_before</strong></li>
+<li>Select a feature and compute the impurity, <strong>impurity_after</strong></li>
+<li>Repeat Step 2 for all features</li>
+<li>Compute the information gain for all features</li>
+<li>Select the biggest information gain feature to split current node</li>
+<li>Repeat above steps until cannot be split</li>
+</ul>
+<h2 id="regression-tree">Regression Tree</h2>
+<p>Above we have explored how decision tree do classification tasks. Now we will go through the regression task. Let’s think about the difference between classification and regression. The most important is the class/label. Classification task would have fixed values, but for regression it would be infinity. In decision tree, we could use the fixed classed to compute the impurity and found best split. In regression, how could we split the tree? And how to measure the impurity after splitting?</p>
+<p>In regression tree, <strong>we often use mean square error (hereinafter is MSE) to measure the impurity.</strong> Of course, we could use other variants of MSE, such as mean absolute error(hereinafter MAE), friedman_mse, et.al.</p>
+<p>Then when do regression, after data points flowed to leaf nodes, the predicted result is the average label of leaf node. That is: <span class="math inline">\(result=average(leaf(y))\)</span></p>
+<p><strong>That’s easy!!!</strong></p>
+<h2 id="ensemble-learning">Ensemble Learning</h2>
+<h4 id="bias-variance-decomposition">Bias-Variance Decomposition</h4>
+<p>Define following variables:</p>
+<ul>
+<li><span class="math inline">\(E(f;D)\)</span> : error between actual value and predicted value.</li>
+<li><span class="math inline">\(f(x;D)\)</span> : predicted value on train set <strong>D</strong></li>
+<li><span class="math inline">\(f(x)=ED[f(x;D)]\)</span>: expectation of <span class="math inline">\(f(x;D)\)</span> on different datasets</li>
+<li><span class="math inline">\(y_D\)</span>: label on train set <strong>D</strong></li>
+<li><span class="math inline">\(y\)</span>: actual label of the true distribution for whole data set</li>
+</ul>
+<p>For regression, we could decompose <span class="math inline">\(E(f;D)\)</span> as follows: <span class="math display">\[
+E(f;D) = E_D[(f(x;D)-f(x))^2] + (f(x)-y)^2 + E_D[(y_D-y)^2]
+\]</span> So <span class="math inline">\(var = E_d[(f(x;D)-f(x))^2]\)</span> is the variance caused by the limited train set. And <span class="math inline">\(noise = E_D[(y_D-y)^2]\)</span></p>
+<p>which caused by data, and we cannot get over it.</p>
+<p><span class="math inline">\(bias = (f(x) - y)^2\)</span> is the bias between predicted value of model and actual label.</p>
+<p>That is: <span class="math inline">\(E(f;D) = bias + var + noise\)</span></p>
+<p>So we could improve our model from two points: <strong>bias</strong> and <strong>var</strong></p>
+<h4 id="bias-variance-trade-off">Bias-variance Trade-off</h4>
+<p>Intuitively, <em>bias</em> represents the error between model predicted value and the train set’s value. <em>variance</em> indicates the error between train set’s value and the actual value. When <em>bias</em> decreased(model fits train set better), <em>variance</em>would increase. Because when train more, the data quality could effect accuracy more. We called this is <strong>Bias-variance trade-off</strong></p>
+<figure>
+<img src="http://scott.fortmann-roe.com/docs/docs/BiasVariance/biasvariance.png" alt="bias variance trade off"><figcaption>bias variance trade off</figcaption>
+</figure>
+<h4 id="bagging">Bagging</h4>
+<p>Bagging is the method which improve models from <strong>var</strong> point of view. It increases the train data sets’ diversity by sub-sampling both on instances and features. The most popular Tree Model bagging algorithm is Random Forest.</p>
+<h5 id="random-forest-extremely-randomized-trees">Random Forest &amp; Extremely Randomized Trees</h5>
+<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" target="_blank" rel="noopener">A random forest is a meta estimator that fits a number of decision tree classifiers on various sub-samples of the dataset and use averaging to improve the predictive accuracy and control <em>over-fitting</em>.</a> Please refer to the <a href="https://pdfs.semanticscholar.org/presentation/ee84/702c392425e77725017f38c557e97744951d.pdf" target="_blank" rel="noopener">Bias-variance decomposition in Random Forests</a> to get more about why using more models ensemble could decrease the variance.</p>
+<figure>
+<img src="https://c.mql5.com/2/33/image1__1.png" alt="Random Forest"><figcaption>Random Forest</figcaption>
+</figure>
+<h4 id="boosting">Boosting</h4>
+<p>Until now, we could improve our model’s accuracy by decreasing variance. Are there any methods which could both decrease variance and bias? Of course, boosting could make this dream comes true.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/20/Logistic-Regression/" rel="next" title="Logistic Regression">
+                <i class="fa fa-chevron-left"></i> Logistic Regression
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Frankie</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tree-model-in-machine-learning"><span class="nav-number">1.</span> <span class="nav-text">Tree Model in Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#define-task"><span class="nav-number">1.1.</span> <span class="nav-text">Define Task</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classification-task"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">Classification Task</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#regression-task"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Regression Task</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decision-tree"><span class="nav-number">1.2.</span> <span class="nav-text">Decision Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#impurity"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">Impurity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informationpurity-gain"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">Information/Purity Gain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#conclusion"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#regression-tree"><span class="nav-number">1.3.</span> <span class="nav-text">Regression Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ensemble-learning"><span class="nav-number">1.4.</span> <span class="nav-text">Ensemble Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bias-variance-decomposition"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">Bias-Variance Decomposition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bias-variance-trade-off"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">Bias-variance Trade-off</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bagging"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">Bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#random-forest-extremely-randomized-trees"><span class="nav-number">1.4.0.3.1.</span> <span class="nav-text">Random Forest &amp; Extremely Randomized Trees</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boosting"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">Boosting</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frankie</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
