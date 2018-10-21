@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="general line model,">
+  <meta name="keywords" content="big data,data warehouse,hadoop,cloud,">
 
 
 
@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="Logistic Regression This name could make many colleges confused. In fact, it is a linear model for binary classification tasks. Let’s think about how computer could classify two people according to th">
-<meta name="keywords" content="general line model">
+<meta name="description" content="Data Lake Big data has envolved about 10 years from its born, currently the most popular big data solution is not Hadoop, but Data Lake. It includes data ingestion, data storage, processing&amp;amp;analys">
+<meta name="keywords" content="big data,data warehouse,hadoop,cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic Regression">
-<meta property="og:url" content="http://yoursite.com/2017/12/01/Logistic-Regression/index.html">
+<meta property="og:title" content="Data Lake">
+<meta property="og:url" content="http://yoursite.com/2018/10/21/data-lake/index.html">
 <meta property="og:site_name" content="Super FF&#39; Blogs">
-<meta property="og:description" content="Logistic Regression This name could make many colleges confused. In fact, it is a linear model for binary classification tasks. Let’s think about how computer could classify two people according to th">
+<meta property="og:description" content="Data Lake Big data has envolved about 10 years from its born, currently the most popular big data solution is not Hadoop, but Data Lake. It includes data ingestion, data storage, processing&amp;amp;analys">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://mathbitsnotebook.com/Algebra2/Exponential/exgraph3.jpg">
-<meta property="og:updated_time" content="2018-10-21T13:17:34.154Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/data-lake/data_lake.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/21/data-lake/history.png">
+<meta property="og:updated_time" content="2018-10-21T13:42:48.470Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic Regression">
-<meta name="twitter:description" content="Logistic Regression This name could make many colleges confused. In fact, it is a linear model for binary classification tasks. Let’s think about how computer could classify two people according to th">
-<meta name="twitter:image" content="https://mathbitsnotebook.com/Algebra2/Exponential/exgraph3.jpg">
+<meta name="twitter:title" content="Data Lake">
+<meta name="twitter:description" content="Data Lake Big data has envolved about 10 years from its born, currently the most popular big data solution is not Hadoop, but Data Lake. It includes data ingestion, data storage, processing&amp;amp;analys">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/21/data-lake/data_lake.png">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/01/Logistic-Regression/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/21/data-lake/">
 
 
 
 
 
-  <title>Logistic Regression | Super FF' Blogs</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Data Lake | Super FF' Blogs</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -235,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/01/Logistic-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/data-lake/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Frankie">
@@ -252,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Logistic Regression</h1>
+          <h1 class="post-title" itemprop="name headline">Data Lake</h1>
         
 
         <div class="post-meta">
@@ -264,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-01T16:21:37+08:00">
-                2017-12-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-21T21:42:48+08:00">
+                2018-10-21
               </time>
             
 
@@ -287,8 +288,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
+                  <a href="/categories/big-data/" itemprop="url" rel="index">
+                    <span itemprop="name">big data</span>
                   </a>
                 </span>
 
@@ -324,34 +325,66 @@
       
 
       
-        <h1 id="logistic-regression">Logistic Regression</h1>
-<p>This name could make many colleges confused. In fact, it is a linear model for binary classification tasks. Let’s think about how computer could classify two people according to their features(such as height, weight, hair length, et.al). Of course we should use statistical method combining with lots of data. LR is hereinafter referred to as the “Logistic Regression”. LR is one linear model to do classification tasks. It first calculate a result according to a linear model such as <span class="math inline">\(y=w^T∗x\)</span>. Then it regularizes <span class="math inline">\(y\)</span> into space <span class="math inline">\([0,1]\)</span>. And 0, 1 represent two classes. At last, if <span class="math inline">\(y\)</span> is closer to 0, then it belongs to 0. Otherwise 1.</p>
-<p>OK. Comes with the question, how do we regularize <span class="math inline">\(y\)</span>? And why we convert it to space <span class="math inline">\([0,1]\)</span> not <span class="math inline">\([−1,1]\)</span>?</p>
-<h2 id="explanation-with-commercial-concepts">Explanation with commercial concepts</h2>
-<p>Suppose we have the classification task, predict one customer whether to buy a product according to some features, such as salary, gender, age, et.al. Suppose one customer buy product’s probability is <span class="math inline">\(p\)</span>, then <span class="math inline">\(1-p\)</span>is the un-buy probability. Define <span class="math inline">\(q = \frac{p}{1-p}\)</span>, then <span class="math inline">\(q \in (0, +\infty)\)</span>. Now we should find a function to fit <span class="math inline">\(q\)</span>. When pp is 0, it means the people don’t want to buy anything, now <span class="math inline">\(q\)</span> is 0. When <span class="math inline">\(p\)</span> increase a bit, <span class="math inline">\(q\)</span> nearly didn’t increase. When one has strong feeling to buy, <span class="math inline">\(q\)</span> increases rapidly. At last it tends to infinity. The exponential function is the best to describe this characteristics. So we use <span class="math inline">\(e^y\)</span> (refer to following picture)to fit <span class="math inline">\(q\)</span>. Such that <span class="math inline">\(q=\frac{p}{1-p}=e^y\)</span></p>
-<figure>
-<img src="https://mathbitsnotebook.com/Algebra2/Exponential/exgraph3.jpg" alt="exponetial function"><figcaption>exponetial function</figcaption>
-</figure>
-<p>Then, <span class="math inline">\(p=\frac{1}{1+e^y}\)</span>. This is the <span class="math inline">\(sigmoid\)</span> function, and this function is the core of logistic regression.</p>
-<h2 id="statistical-explanation">Statistical Explanation</h2>
-<p>The above explanation is very rigorous. Now from statistic point of view, we can think the binary classification problem as n Bernoulli experiments. That is <span class="math inline">\(X \sim B(n, \theta)\)</span>, then <span class="math inline">\(p(y=1|\theta) = \theta\)</span>, <span class="math inline">\(p(y=0|\theta)=1-\theta\)</span>.</p>
-<p>So that <span class="math display">\[
-p(y|\theta) = \theta^{y} (1-\theta)^{1-y}
-\]</span> And the likelihood function is: <span class="math display">\[
-L = \prod_{i=1}^n p^{(i)}
-\]</span> According to maximum likelihood estimation: <span class="math inline">\(max(L)\)</span> is equals to <span class="math inline">\(max(\log(L))\)</span></p>
-<p>so the objective is: <span class="math display">\[
-obj = max(\sum_{i=1}^n(\log p^{(i)}))
-\]</span></p>
-<p><span class="math display">\[
-obj = max(\sum_{i=1}^n (y^{(i)}\log\theta + (1-y^{(i)})\log(1-\theta)))
-\]</span></p>
-<p><span class="math display">\[
-obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
-\]</span></p>
-<p>where <span class="math inline">\(y^{(i)} = W^T x^{(i)}\)</span></p>
-<h2 id="generalized-linear-model">Generalized Linear Model</h2>
-<p>Above section has done the statistical explanation, but there are two unknown parameters: <span class="math inline">\(W^T\)</span> and <span class="math inline">\(\theta\)</span>. Actually we want the probability <span class="math inline">\(\theta\)</span> could be associated with <span class="math inline">\(x\)</span> and <span class="math inline">\(W^T\)</span>. For detailed explanation, please refer to my previous blog <a href="">General Linear Models</a></p>
+        <h1 id="data-lake">Data Lake</h1>
+<p>Big data has envolved about 10 years from its born, currently the most popular big data solution is not Hadoop, but Data Lake. It includes data ingestion, data storage, processing&amp;analysis and inference.</p>
+<blockquote>
+<p>A data lake is a centralized repository that allows you to store all your structured and unstructured data at any scale. You can store your data as-is, without having to first structure the data, and run different types of analytics—from dashboards and visualizations to big data processing, real-time analytics, and machine learning to guide better decisions.</p>
+</blockquote>
+<img src="/2018/10/21/data-lake/data_lake.png" title="Data Lake">
+<p>Before big data, we must have heard decision support system, data warehouse and business intelligence. These tools are mainly for struetured data analysis, such as OLAP workloads. But for big data, not only structure data, but semi-structure and non-structure data, these tool are not that suitable(high cost or limited computation/storage). At the time, Google has lanched their data processing infrastructure -- MapReduce which used for processing log files or web pages. Its great capability and cost-effective have made it become the market darling. Utill now the big data platform based on Hadoop, such as cloudera, MapR are also the most popular on-premise big data solutions.</p>
+<img src="/2018/10/21/data-lake/history.png" title="Data Management & Analytics Solution Envolvment">
+<p>Actually data lake combine the functionality of DWH and Hadoop. It has some key difference between DWH. Let's explore the difference between data lake and DWH.</p>
+<blockquote>
+<p>A data warehouse is a database optimized to analyze relational data coming from transactional systems and line of business applications. The data structure, and schema are defined in advance to optimize for fast SQL queries, where the results are typically used for operational reporting and analysis. Data is cleaned, enriched, and transformed so it can act as the “single source of truth” that users can trust.</p>
+</blockquote>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 42%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Characteristics</th>
+<th>Data Warehouse</th>
+<th>Data Lake</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Data</strong></td>
+<td>Relational from transactional systems, operational databases, and line of business applications</td>
+<td>Non-relational and relational from IoT devices, web sites, mobile apps, social media, and corporate applications</td>
+</tr>
+<tr class="even">
+<td><strong>Schema</strong></td>
+<td>Designed prior to the DW implementation (schema-on-write)</td>
+<td>Written at the time of analysis (schema-on-read)</td>
+</tr>
+<tr class="odd">
+<td><strong>Price/Performance</strong></td>
+<td>Fastest query results using higher cost storage</td>
+<td>Query results getting faster using low-cost storage</td>
+</tr>
+<tr class="even">
+<td><strong>Data Quality</strong></td>
+<td>Highly curated data that serves as the central version of the truth</td>
+<td>Any data that may or may not be curated (ie. raw data)</td>
+</tr>
+<tr class="odd">
+<td><strong>Users</strong></td>
+<td>Business analysts</td>
+<td>Data scientists, Data developers, and Business analysts (using curated data)</td>
+</tr>
+<tr class="even">
+<td><strong>Analytics</strong></td>
+<td>Batch reporting, BI and visualizations</td>
+<td>Machine Learning, Predictive analytics, data discovery and profiling</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: DWH, Data Lake comparision</p>
+<p>Data lake is based on Hadoop and envolved a lot. For Hadoop, it is based on the theory of data locality which made it cost-effective and popular. But now, the hardware price have decreased a lot. We can use the same price to afford a SSD which has very high read disk speed. Due to the data locality, computation and storage are tight coupling which lead the poor scalability. For example, I have encountered a real case which use on-premise Hadoop cluster as the big data platform. For last one year, its computation usage is about 15%. But now the storage usage rate is about 70%, which means they must to scale out their cluster for fulfill their storage requirements. If they scale out the cluster, the cup usage must be even lower. So the key difference between data lake and Hadoop cluster is computation and storage de-coupling. Except that data lake have better scalability, if on cloud the storage and computation would be infinite.</p>
 
       
     </div>
@@ -369,7 +402,13 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
       
         <div class="post-tags">
           
-            <a href="/tags/general-line-model/" rel="tag"># general line model</a>
+            <a href="/tags/big-data/" rel="tag"># big data</a>
+          
+            <a href="/tags/data-warehouse/" rel="tag"># data warehouse</a>
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+            <a href="/tags/cloud/" rel="tag"># cloud</a>
           
         </div>
       
@@ -382,8 +421,8 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/10/Linear-Regression/" rel="next" title="Linear Regression">
-                <i class="fa fa-chevron-left"></i> Linear Regression
+              <a href="/2018/10/20/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -391,10 +430,6 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/20/Tree-Model-in-ML/" rel="prev" title="Tree Model in ML">
-                Tree Model in ML <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -526,7 +561,7 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic-regression"><span class="nav-number">1.</span> <span class="nav-text">Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#explanation-with-commercial-concepts"><span class="nav-number">1.1.</span> <span class="nav-text">Explanation with commercial concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-explanation"><span class="nav-number">1.2.</span> <span class="nav-text">Statistical Explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generalized-linear-model"><span class="nav-number">1.3.</span> <span class="nav-text">Generalized Linear Model</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#data-lake"><span class="nav-number">1.</span> <span class="nav-text">Data Lake</span></a></li></ol></div>
             
 
           </div>
@@ -673,7 +708,24 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -726,43 +778,6 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

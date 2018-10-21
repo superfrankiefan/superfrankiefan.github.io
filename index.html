@@ -229,6 +229,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/data-lake/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Frankie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Super FF' Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/data-lake/" itemprop="url">Data Lake</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-21T21:42:48+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/big-data/" itemprop="url" rel="index">
+                    <span itemprop="name">big data</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="data-lake">Data Lake</h1>
+<p>Big data has envolved about 10 years from its born, currently the most popular big data solution is not Hadoop, but Data Lake. It includes data ingestion, data storage, processing&amp;analysis and inference.</p>
+<blockquote>
+<p>A data lake is a centralized repository that allows you to store all your structured and unstructured data at any scale. You can store your data as-is, without having to first structure the data, and run different types of analytics—from dashboards and visualizations to big data processing, real-time analytics, and machine learning to guide better decisions.</p>
+</blockquote>
+<img src="/2018/10/21/data-lake/data_lake.png" title="Data Lake">
+<p>Before big data, we must have heard decision support system, data warehouse and business intelligence. These tools are mainly for struetured data analysis, such as OLAP workloads. But for big data, not only structure data, but semi-structure and non-structure data, these tool are not that suitable(high cost or limited computation/storage). At the time, Google has lanched their data processing infrastructure -- MapReduce which used for processing log files or web pages. Its great capability and cost-effective have made it become the market darling. Utill now the big data platform based on Hadoop, such as cloudera, MapR are also the most popular on-premise big data solutions.</p>
+<img src="/2018/10/21/data-lake/history.png" title="Data Management & Analytics Solution Envolvment">
+<p>Actually data lake combine the functionality of DWH and Hadoop. It has some key difference between DWH. Let's explore the difference between data lake and DWH.</p>
+<blockquote>
+<p>A data warehouse is a database optimized to analyze relational data coming from transactional systems and line of business applications. The data structure, and schema are defined in advance to optimize for fast SQL queries, where the results are typically used for operational reporting and analysis. Data is cleaned, enriched, and transformed so it can act as the “single source of truth” that users can trust.</p>
+</blockquote>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 42%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Characteristics</th>
+<th>Data Warehouse</th>
+<th>Data Lake</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Data</strong></td>
+<td>Relational from transactional systems, operational databases, and line of business applications</td>
+<td>Non-relational and relational from IoT devices, web sites, mobile apps, social media, and corporate applications</td>
+</tr>
+<tr class="even">
+<td><strong>Schema</strong></td>
+<td>Designed prior to the DW implementation (schema-on-write)</td>
+<td>Written at the time of analysis (schema-on-read)</td>
+</tr>
+<tr class="odd">
+<td><strong>Price/Performance</strong></td>
+<td>Fastest query results using higher cost storage</td>
+<td>Query results getting faster using low-cost storage</td>
+</tr>
+<tr class="even">
+<td><strong>Data Quality</strong></td>
+<td>Highly curated data that serves as the central version of the truth</td>
+<td>Any data that may or may not be curated (ie. raw data)</td>
+</tr>
+<tr class="odd">
+<td><strong>Users</strong></td>
+<td>Business analysts</td>
+<td>Data scientists, Data developers, and Business analysts (using curated data)</td>
+</tr>
+<tr class="even">
+<td><strong>Analytics</strong></td>
+<td>Batch reporting, BI and visualizations</td>
+<td>Machine Learning, Predictive analytics, data discovery and profiling</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: DWH, Data Lake comparision</p>
+<p>Data lake is based on Hadoop and envolved a lot. For Hadoop, it is based on the theory of data locality which made it cost-effective and popular. But now, the hardware price have decreased a lot. We can use the same price to afford a SSD which has very high read disk speed. Due to the data locality, computation and storage are tight coupling which lead the poor scalability. For example, I have encountered a real case which use on-premise Hadoop cluster as the big data platform. For last one year, its computation usage is about 15%. But now the storage usage rate is about 70%, which means they must to scale out their cluster for fulfill their storage requirements. If they scale out the cluster, the cup usage must be even lower. So the key difference between data lake and Hadoop cluster is computation and storage de-coupling. Except that data lake have better scalability, if on cloud the storage and computation would be infinite.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/hello-world/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -416,8 +617,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
                   </a>
                 </span>
 
@@ -647,8 +848,8 @@ E(f;D) = E_D[(f(x;D)-f(x))^2] + (f(x)-y)^2 + E_D[(y_D-y)^2]
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
                   </a>
                 </span>
 
@@ -816,8 +1017,8 @@ obj = max(\sum_{i=1}^n (\log(1-\theta) + y^{(i)} \log\frac{\theta}{1-\theta}))
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
                   </a>
                 </span>
 
@@ -998,8 +1199,8 @@ W_j = W_j - \sum_{i=1}^{n}\eta * (W^TX^{(i)} - y^{(i)})x^{(i)}_j
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
                   </a>
                 </span>
 
@@ -1254,7 +1455,7 @@ l(\theta) = \sum_{i=1}^{m}\log(p(y^{(i)}|x^{(i)};\theta)) = \sum_{i=1}^{m}\prod_
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1265,7 +1466,7 @@ l(\theta) = \sum_{i=1}^{m}\log(p(y^{(i)}|x^{(i)};\theta)) = \sum_{i=1}^{m}\prod_
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1276,7 +1477,7 @@ l(\theta) = \sum_{i=1}^{m}\log(p(y^{(i)}|x^{(i)};\theta)) = \sum_{i=1}^{m}\prod_
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
